@@ -1,0 +1,1911 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ریاضی‌دان کوچک | کلاس ریاضی آقا امیر</title>
+  
+  <meta name="theme-color" content="#f59e0b">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="ریاضی آقا امیر">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Persian Font Peyda با اعداد فارسی -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-Digits/font-face.css">
+  <!-- Tone.js برای افکت‌های صوتی کودکانه -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    @font-face {
+      font-family: 'Peyda';
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Peyda';
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Peyda';
+      src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Black.woff2') format('woff2');
+      font-weight: 900;
+      font-display: swap;
+    }
+
+    *, *::before, *::after {
+      font-family: 'Peyda', 'Vazirmatn FD', 'Vazirmatn', system-ui, -apple-system, sans-serif !important;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      direction: rtl;
+    }
+
+    .ltr-force {
+      direction: ltr !important;
+      unicode-bidi: isolate;
+    }
+    .rtl-force {
+      direction: rtl !important;
+      unicode-bidi: isolate;
+    }
+
+    @keyframes bounce-slow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+    @keyframes popIn {
+      0% { transform: scale(0.65); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-bounce-slow {
+      animation: bounce-slow 2.2s infinite ease-in-out;
+    }
+    .animate-pop {
+      animation: popIn 0.28s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(14px);
+      border: 3px solid rgba(255, 255, 255, 0.95);
+    }
+
+    .tally-bundle {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      height: 56px;
+      background: #ffffff;
+      border: 2px solid #fed7aa;
+      border-radius: 14px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+    .tally-line {
+      width: 6px;
+      height: 40px;
+      background: #ea580c;
+      border-radius: 6px;
+    }
+    .tally-slash {
+      position: absolute;
+      width: 58px;
+      height: 6px;
+      background: #dc2626;
+      top: 25px;
+      right: 2px;
+      transform: rotate(-30deg);
+      border-radius: 6px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.22);
+    }
+    .tally-single-container {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      height: 56px;
+      background: #ffffff;
+      border: 2px solid #ffedd5;
+      border-radius: 14px;
+    }
+
+    .btn-3d {
+      transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .btn-3d:active {
+      transform: translateY(2px) scale(0.96);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-amber-100 via-sky-100 to-rose-100 min-h-screen text-slate-800 flex flex-col text-right selection:bg-amber-300">
+
+  <!-- هدر صفحه (طراحی تمیز و واکنش‌گرا - با اسکرول به پایین صفحه محو می‌شود) -->
+  <header class="bg-white/95 shadow-sm border-b border-amber-200 w-full relative z-30">
+    <div class="max-w-6xl mx-auto px-3 md:px-5 py-3 flex items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <!-- دکمه منوی همبرگری برای باز کردن دراور بخش‌ها -->
+        <button onclick="toggleCategoryDrawer()" class="w-10 h-10 md:w-11 md:h-11 bg-amber-500 hover:bg-amber-600 text-white rounded-2xl flex items-center justify-center shadow btn-3d shrink-0" title="فهرست بخش‌های بازی">
+          <i class="fa-solid fa-bars text-base md:text-lg"></i>
+        </button>
+
+        <div class="w-10 h-10 md:w-11 md:h-11 bg-amber-500 rounded-2xl flex items-center justify-center text-white text-xl md:text-2xl shadow animate-bounce-slow shrink-0">
+          📐
+        </div>
+        <div class="min-w-0">
+          <h1 class="text-xs sm:text-sm md:text-base font-black text-amber-950 truncate">ریاضی‌دان کوچک | کلاس اول</h1>
+          <div class="flex items-center gap-1.5 mt-0.5 flex-wrap">
+            <span class="text-[10px] sm:text-[11px] text-amber-700 font-bold shrink-0">کلاس آقای جهدی</span>
+            <!-- نشانگر بخش فعال جاری -->
+            <span id="current-section-badge" class="bg-amber-100 text-amber-900 border border-amber-300 px-2 py-0.5 rounded-lg text-[10px] md:text-[11px] font-black truncate max-w-[110px] sm:max-w-none">شمارش و اشیاء</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-1.5 md:gap-2 shrink-0">
+        <!-- ستاره‌های کسب شده -->
+        <div class="bg-amber-100 border border-amber-300 px-2.5 md:px-3 py-1.5 rounded-2xl flex items-center gap-1 shadow-sm">
+          <span class="text-base md:text-xl">⭐</span>
+          <span id="global-stars" class="font-black text-amber-900 text-xs md:text-base">۰</span>
+        </div>
+
+        <!-- ابزار معلم -->
+        <button onclick="toggleTeacherModal()" class="w-9 h-9 md:w-10 md:h-10 bg-teal-600 hover:bg-teal-700 text-white rounded-2xl flex items-center justify-center shadow btn-3d" title="میز کار آقای جهدی">
+          <i class="fa-solid fa-chalkboard-user text-xs md:text-sm"></i>
+        </button>
+
+        <!-- کنترل صدا -->
+        <button onclick="toggleSoundMute()" id="btn-sound-toggle" class="w-9 h-9 md:w-10 md:h-10 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-2xl flex items-center justify-center shadow-sm btn-3d" title="صدا">
+          <i class="fa-solid fa-volume-high text-xs md:text-sm"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- منوی کشویی همبرگری (Drawer) کامل با آیکون‌های اختصاصی برای هر بخش -->
+  <div id="category-drawer-backdrop" onclick="toggleCategoryDrawer()" class="fixed inset-0 bg-slate-900/50 backdrop-blur-xs z-50 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+  <aside id="category-drawer" class="fixed top-0 right-0 h-full w-72 max-w-[85vw] bg-white z-50 shadow-2xl flex flex-col p-4 border-l-4 border-amber-400 transform translate-x-full transition-transform duration-300 ease-out">
+    <div class="flex items-center justify-between pb-3 border-b border-amber-100">
+      <div class="flex items-center gap-2">
+        <span class="text-2xl">📚</span>
+        <h3 class="font-black text-amber-950 text-base">فهرست بخش‌های ریاضی</h3>
+      </div>
+      <button onclick="toggleCategoryDrawer()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center hover:bg-rose-100 hover:text-rose-600 transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="flex-grow overflow-y-auto py-3 space-y-2" id="drawer-items-list">
+      <button onclick="selectDrawerTab('counting', 'شمارش و اشیاء')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-black text-sm flex items-center gap-3 bg-amber-500 text-white shadow" data-tab="counting">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-calculator"></i></span>
+        <span>۱. شمارش و اشیاء</span>
+      </button>
+
+      <button onclick="selectDrawerTab('animal-farm', 'مزرعه حیوانات')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50" data-tab="animal-farm">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-paw"></i></span>
+        <span>۲. مزرعه حیوانات</span>
+      </button>
+
+      <button onclick="selectDrawerTab('tally', 'چوب‌خط و دسته‌بندی')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50" data-tab="tally">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-bars-staggered"></i></span>
+        <span>۳. چوب‌خط و دسته‌بندی</span>
+      </button>
+
+      <button onclick="selectDrawerTab('axis', 'قورباغه روی محور')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50" data-tab="axis">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-road"></i></span>
+        <span>۴. قورباغه روی محور</span>
+      </button>
+
+      <button onclick="selectDrawerTab('operations', 'جمع و تفریق تصویری')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50" data-tab="operations">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-plus-minus"></i></span>
+        <span>۵. جمع و تفریق تصویری</span>
+      </button>
+
+      <button onclick="selectDrawerTab('patterns', 'قطار الگوها')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50" data-tab="patterns">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-train"></i></span>
+        <span>۶. قطار الگوها</span>
+      </button>
+
+      <button onclick="selectDrawerTab('compare', 'تمساح شکمو')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50" data-tab="compare">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-scale-balanced"></i></span>
+        <span>۷. تمساح شکمو</span>
+      </button>
+
+      <button onclick="selectDrawerTab('sudoku', 'جدول شگفت‌انگیز')" class="drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50" data-tab="sudoku">
+        <span class="text-xl w-6 text-center"><i class="fa-solid fa-puzzle-piece"></i></span>
+        <span>۸. جدول شگفت‌انگیز</span>
+      </button>
+    </div>
+
+    <div class="pt-3 border-t border-amber-100 text-center text-xs text-amber-800 font-bold">
+      کلاس درس آقای جهدی 🌟
+    </div>
+  </aside>
+
+  <!-- بستر ماژول‌های آموزشی ریاضی -->
+  <main class="flex-grow max-w-5xl w-full mx-auto p-3 md:p-6 flex flex-col justify-center">
+
+    <!-- ۱. شمارش لمسی و تصویری اشیاء -->
+    <section id="section-counting" class="tab-panel block">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-amber-200">
+        <div class="flex flex-col gap-2 mb-3">
+          <div class="flex items-center justify-between">
+            <h2 class="text-base sm:text-xl font-black text-amber-950">اشیاء را لمس کن و بشمار! 🎈</h2>
+            <div class="flex gap-1 bg-amber-100 p-1 rounded-xl text-xs font-bold shrink-0">
+              <button onclick="setCountingRange(10)" id="count-range-10" class="px-2 py-1 rounded-lg text-amber-900">۱۰</button>
+              <button onclick="setCountingRange(20)" id="count-range-20" class="px-2 py-1 rounded-lg text-amber-900">۲۰</button>
+              <button onclick="setCountingRange(30)" id="count-range-30" class="px-2 py-1 rounded-lg bg-amber-500 text-white font-black shadow-xs">۳۰</button>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-600">هر شکل را لمس کن تا شمرده شود، سپس پاسخ درست را انتخاب کن.</p>
+        </div>
+
+        <div class="bg-amber-50/80 rounded-xl p-3 border border-amber-300 min-h-[170px] max-h-[260px] overflow-y-auto flex flex-wrap items-center justify-center gap-1.5 sm:gap-2" id="counting-items-area"></div>
+
+        <div class="mt-3 flex items-center justify-between gap-2 bg-white/80 p-2 rounded-xl border border-amber-100">
+          <div class="flex items-center gap-1.5">
+            <span class="text-xs font-bold text-slate-600">شمرده شده:</span>
+            <span id="counted-so-far" class="text-lg font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-lg border border-emerald-200">۰</span>
+          </div>
+
+          <button onclick="newCountingGame()" class="bg-amber-500 hover:bg-amber-600 text-white font-black px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 shadow-xs btn-3d">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span>بعدی</span>
+          </button>
+        </div>
+
+        <div class="grid grid-cols-4 gap-2 mt-3" id="counting-options-box"></div>
+        <div id="counting-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+    <!-- ۲. مزرعه حیوانات -->
+    <section id="section-animal-farm" class="tab-panel hidden">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-lime-200">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <h2 class="text-base sm:text-xl font-black text-lime-950">مزرعه شاد حیوانات! 🦁</h2>
+          <button onclick="newAnimalFarmGame()" class="bg-lime-600 hover:bg-lime-700 text-white font-black px-3 py-1.5 rounded-xl text-xs flex items-center gap-1 shadow-xs btn-3d">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span>مزرعه جدید</span>
+          </button>
+        </div>
+
+        <div class="bg-lime-100/90 rounded-xl p-2.5 border border-lime-300 flex items-center justify-between mb-3">
+          <div class="flex items-center gap-2">
+            <div id="target-animal-icon" class="w-11 h-11 bg-white rounded-xl flex items-center justify-center text-3xl shadow-xs border border-lime-200">🐰</div>
+            <div>
+              <div class="text-[10px] font-bold text-lime-800">حیوان مورد نظر:</div>
+              <div id="target-animal-name" class="text-xs sm:text-sm font-black text-lime-950">فقط خرگوش‌ها را بشمار!</div>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-1 bg-white px-2 py-1 rounded-xl shadow-xs border border-lime-200">
+            <span class="text-[10px] font-bold text-slate-500">پیدا شده:</span>
+            <span id="farm-tapped-count" class="text-base font-black text-lime-700">۰</span>
+          </div>
+        </div>
+
+        <div class="bg-emerald-50/70 rounded-xl p-2.5 border border-dashed border-lime-300 min-h-[170px] max-h-[250px] overflow-y-auto flex flex-wrap items-center justify-center gap-1.5 sm:gap-2" id="animal-farm-area"></div>
+
+        <div class="text-center text-[11px] font-black text-slate-600 mt-2.5 mb-1.5">چند تا از این حیوان در مزرعه هست؟</div>
+        <div class="grid grid-cols-4 gap-2" id="animal-farm-options"></div>
+        <div id="animal-farm-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+    <!-- ۳. چوب‌خط -->
+    <section id="section-tally" class="tab-panel hidden">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-orange-200">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <h2 class="text-base sm:text-xl font-black text-orange-950">چوب‌خط ۵ تایی 🥖</h2>
+          <div class="flex gap-1 bg-orange-100 p-1 rounded-xl text-xs font-bold">
+            <button onclick="setTallyMode('quiz')" id="tally-btn-quiz" class="px-2.5 py-1 rounded-lg text-xs font-black bg-orange-600 text-white shadow-xs">مسابقه</button>
+            <button onclick="setTallyMode('sandbox')" id="tally-btn-sandbox" class="px-2.5 py-1 rounded-lg text-xs font-black text-orange-900">کارگاه 🖐️</button>
+          </div>
+        </div>
+
+        <div id="tally-quiz-area" class="block">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-[11px] font-bold text-slate-500">محدوده:</span>
+            <div class="flex gap-1 bg-orange-100 p-0.5 rounded-lg text-xs font-bold">
+              <button onclick="setTallyQuizRange(10)" id="tally-range-10" class="px-2 py-0.5 rounded text-orange-900">۱۰</button>
+              <button onclick="setTallyQuizRange(20)" id="tally-range-20" class="px-2 py-0.5 rounded text-orange-900">۲۰</button>
+              <button onclick="setTallyQuizRange(30)" id="tally-range-30" class="px-2 py-0.5 rounded bg-orange-500 text-white font-black shadow-xs">۳۰</button>
+            </div>
+          </div>
+
+          <div class="bg-orange-50 rounded-xl p-4 border border-orange-200 flex flex-col items-center justify-center">
+            <div class="text-[11px] font-bold text-slate-500 mb-0.5">عدد هدف:</div>
+            <div id="tally-target-num" class="text-4xl sm:text-5xl font-black text-orange-600 bg-white px-6 py-1.5 rounded-xl shadow-inner border border-orange-200">۱۴</div>
+            <div id="tally-helper-text" class="text-[11px] font-bold text-orange-800 mt-1.5 bg-orange-200/50 px-2 py-0.5 rounded-lg">راهنما</div>
+          </div>
+
+          <div class="text-center text-[11px] font-black text-slate-600 mt-3 mb-2">چوب‌خط درست را انتخاب کن:</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2" id="tally-choices-box"></div>
+        </div>
+
+        <div id="tally-sandbox-area" class="hidden">
+          <div class="bg-white rounded-xl p-3 border border-orange-300 text-center">
+            <div class="flex items-center justify-between bg-amber-50 p-2 rounded-xl border border-orange-200 mb-2">
+              <span class="text-xs font-bold text-amber-800">برای این عدد چوب‌خط بکش:</span>
+              <div class="flex items-center gap-1.5">
+                <span id="sandbox-target-display" class="text-2xl font-black text-orange-600 bg-white px-3 py-0.5 rounded-lg border border-orange-300">۱۸</span>
+                <button onclick="newSandboxChallenge()" class="w-7 h-7 bg-orange-100 hover:bg-orange-200 text-orange-700 rounded-lg flex items-center justify-center btn-3d"><i class="fa-solid fa-arrows-rotate text-xs"></i></button>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center items-center gap-1.5 my-2">
+              <button onclick="addSandboxTally()" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-3 py-2 rounded-xl text-xs shadow-xs btn-3d flex items-center gap-1">
+                <i class="fa-solid fa-plus"></i><span>یکی بکش</span>
+              </button>
+              <button onclick="removeSandboxTally()" class="bg-amber-100 hover:bg-amber-200 text-amber-900 font-bold px-2.5 py-2 rounded-xl text-xs btn-3d flex items-center gap-1">
+                <i class="fa-solid fa-minus"></i><span>کم کن</span>
+              </button>
+              <button onclick="resetSandboxTally()" class="bg-slate-100 text-slate-600 font-bold px-2 py-2 rounded-xl text-xs btn-3d">از اول</button>
+              <button onclick="checkSandboxTally()" class="bg-orange-600 hover:bg-orange-700 text-white font-black px-3.5 py-2 rounded-xl text-xs shadow-xs btn-3d flex items-center gap-1">
+                <i class="fa-solid fa-check"></i><span>بررسی</span>
+              </button>
+            </div>
+
+            <div id="sandbox-tally-display" class="min-h-[85px] bg-orange-50/70 p-2.5 rounded-xl border border-dashed border-orange-200 flex flex-wrap items-center justify-center gap-2"></div>
+          </div>
+        </div>
+
+        <div id="tally-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+    <!-- ۴. قورباغه روی محور -->
+    <section id="section-axis" class="tab-panel hidden">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-emerald-200">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-2">
+          <h2 class="text-base sm:text-xl font-black text-emerald-950">قورباغه روی محور 🐸</h2>
+          <div class="flex flex-wrap items-center gap-1.5 w-full sm:w-auto justify-between">
+            <div class="flex gap-0.5 bg-emerald-100 p-0.5 rounded-xl text-xs font-bold">
+              <button onclick="setAxisOp('both')" id="axis-op-both" class="px-2 py-0.5 rounded-lg bg-emerald-600 text-white font-black shadow-xs">ترکیبی</button>
+              <button onclick="setAxisOp('add')" id="axis-op-add" class="px-2 py-0.5 rounded-lg text-emerald-900 font-bold">جمع (+)</button>
+              <button onclick="setAxisOp('sub')" id="axis-op-sub" class="px-2 py-0.5 rounded-lg text-emerald-900 font-bold">تفریق (-)</button>
+            </div>
+            <div class="flex gap-0.5 bg-emerald-100 p-0.5 rounded-xl text-xs font-bold">
+              <button onclick="setAxisRange(10)" id="axis-range-10" class="px-2 py-0.5 rounded-lg bg-emerald-600 text-white font-black shadow-xs">تا ۱۰</button>
+              <button onclick="setAxisRange(20)" id="axis-range-20" class="px-2 py-0.5 rounded-lg text-emerald-900">تا ۲۰</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- محور ریسپانسیو با اسکرول لمسی نرم -->
+        <div class="bg-emerald-50/80 rounded-xl p-3 border border-emerald-200 my-2 overflow-x-auto ltr-force no-scrollbar" dir="ltr">
+          <div class="relative min-w-[500px] h-28 flex flex-col justify-end pb-2 select-none px-3">
+            <div class="relative w-full h-12">
+              <div id="frog-avatar" class="absolute bottom-0.5 transition-all duration-500 text-3xl flex items-center justify-center pointer-events-none" style="left: 0%; transform: translateX(-50%) scaleX(1);">🐸</div>
+            </div>
+            <div class="w-full h-2.5 bg-emerald-700 rounded-full relative mb-1">
+              <div id="axis-ticks" class="w-full h-full relative"></div>
+            </div>
+            <div id="axis-numbers-labels" class="w-full relative h-6 text-emerald-950 font-black text-xs"></div>
+          </div>
+        </div>
+
+        <div class="p-2.5 bg-white rounded-xl border border-emerald-200 mb-2.5 shadow-xs flex items-center justify-between gap-2">
+          <div id="axis-question-text" class="text-xs sm:text-sm font-black text-emerald-900 leading-snug">مسئله در حال بارگذاری...</div>
+          <button onclick="newAxisGame()" class="bg-emerald-100 text-emerald-900 font-bold px-2.5 py-1 rounded-lg text-xs shrink-0 btn-3d"><i class="fa-solid fa-arrows-rotate"></i></button>
+        </div>
+
+        <div class="text-center text-[11px] font-black text-slate-600 mb-1.5">عدد نهایی را لمس کن:</div>
+        <div class="grid grid-cols-6 sm:grid-cols-11 gap-1" id="axis-numbers-grid"></div>
+        <div id="axis-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+    <!-- ۵. جمع و تفریق تصویری -->
+    <section id="section-operations" class="tab-panel hidden">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-sky-200">
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <h2 class="text-base sm:text-xl font-black text-sky-950">جمع و تفریق 🍎</h2>
+          <div class="flex items-center gap-1">
+            <div class="flex gap-0.5 bg-amber-100 p-0.5 rounded-lg text-xs font-bold">
+              <button onclick="setOpRange(10)" id="op-range-10" class="px-1.5 py-0.5 rounded text-amber-900">۱۰</button>
+              <button onclick="setOpRange(20)" id="op-range-20" class="px-1.5 py-0.5 rounded text-amber-900">۲۰</button>
+              <button onclick="setOpRange(40)" id="op-range-40" class="px-1.5 py-0.5 rounded bg-amber-500 text-white font-black shadow-xs">۴۰</button>
+            </div>
+            <div class="flex gap-0.5 bg-sky-100 p-0.5 rounded-lg text-xs font-bold">
+              <button onclick="setOperationType('add')" id="op-btn-add" class="px-2 py-0.5 rounded font-black bg-sky-600 text-white">جمع</button>
+              <button onclick="setOperationType('sub')" id="op-btn-sub" class="px-2 py-0.5 rounded font-black text-sky-800">تفریق</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-sky-50 rounded-xl p-3 border border-sky-200 flex flex-wrap items-center justify-center gap-2 sm:gap-4 ltr-force" dir="ltr">
+          <div class="flex flex-col items-center">
+            <div id="op-group-1" class="flex flex-wrap justify-center items-center gap-1 bg-white p-2 rounded-xl min-w-[70px] min-h-[50px] border border-sky-200 shadow-xs max-w-[120px]"></div>
+            <span id="op-num-1" class="text-2xl font-black text-sky-700 mt-0.5 rtl-force">۴</span>
+          </div>
+          <div id="op-sign" class="text-2xl font-black text-amber-500 font-sans">+</div>
+          <div class="flex flex-col items-center">
+            <div id="op-group-2" class="flex flex-wrap justify-center items-center gap-1 bg-white p-2 rounded-xl min-w-[70px] min-h-[50px] border border-sky-200 shadow-xs max-w-[120px]"></div>
+            <span id="op-num-2" class="text-2xl font-black text-sky-700 mt-0.5 rtl-force">۳</span>
+          </div>
+          <div class="text-2xl font-black text-slate-400 font-sans">=</div>
+          <div class="w-11 h-11 bg-amber-300 rounded-xl border-2 border-amber-500 border-dashed flex items-center justify-center text-xl font-black text-amber-950 shadow-xs">؟</div>
+        </div>
+
+        <div class="grid grid-cols-4 gap-2 mt-3" id="op-answers-grid"></div>
+        <div id="op-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+    <!-- ۶. قطار الگوها -->
+    <section id="section-patterns" class="tab-panel hidden">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-purple-200">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <h2 class="text-base sm:text-xl font-black text-purple-950">واگن بعدی چیه؟ 🚂</h2>
+          <div class="flex gap-1 bg-purple-100 p-0.5 rounded-xl text-xs font-bold">
+            <button onclick="setPatternDifficulty('easy')" id="pattern-diff-easy" class="px-2 py-0.5 rounded-lg bg-purple-600 text-white font-black shadow-xs">آسان</button>
+            <button onclick="setPatternDifficulty('medium')" id="pattern-diff-medium" class="px-2 py-0.5 rounded-lg text-purple-900">متوسط</button>
+            <button onclick="setPatternDifficulty('hard')" id="pattern-diff-hard" class="px-2 py-0.5 rounded-lg text-purple-900">سخت</button>
+          </div>
+        </div>
+
+        <div class="bg-purple-50/80 rounded-xl p-3 border border-purple-200 overflow-x-auto no-scrollbar">
+          <div class="flex items-center justify-center gap-1.5 min-w-[280px]" id="pattern-train-cars"></div>
+        </div>
+
+        <div class="text-center text-[11px] font-black text-slate-600 mt-3 mb-1.5">شکل بعدی را انتخاب کن:</div>
+        <div class="flex flex-wrap justify-center gap-2 max-w-sm mx-auto" id="pattern-choices-box"></div>
+        <div id="pattern-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+    <!-- ۷. تمساح شکمو -->
+    <section id="section-compare" class="tab-panel hidden">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-teal-200">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <h2 class="text-base sm:text-xl font-black text-teal-950 leading-tight">کدام دسته بیشتر است؟ 🐊</h2>
+          <div class="flex gap-0.5 bg-teal-100 p-0.5 rounded-xl text-xs font-bold shrink-0">
+            <button onclick="setCompareDifficulty('easy')" id="comp-diff-easy" class="px-2 py-0.5 rounded-lg bg-teal-600 text-white font-black shadow-xs">تا ۱۰</button>
+            <button onclick="setCompareDifficulty('medium')" id="comp-diff-medium" class="px-2 py-0.5 rounded-lg text-teal-900">تا ۲۰</button>
+            <button onclick="setCompareDifficulty('hard')" id="comp-diff-hard" class="px-2 py-0.5 rounded-lg text-teal-900">تا ۳۰</button>
+          </div>
+        </div>
+
+        <div class="bg-teal-50/60 rounded-2xl p-2.5 border border-teal-200 flex flex-col sm:flex-row items-stretch justify-between gap-2.5 shadow-inner">
+          
+          <!-- دسته سمت راست -->
+          <div class="flex-1 flex flex-col items-center justify-between bg-white p-2.5 rounded-xl border border-teal-200 shadow-xs">
+            <div class="flex items-center justify-between w-full mb-1">
+              <span class="text-[10px] font-black text-teal-800 bg-teal-100 px-2 py-0.5 rounded-md">سمت راست</span>
+              <span class="text-[10px] font-bold text-slate-500">شمرده: <b id="comp-right-tapped" class="text-emerald-600 font-black">۰</b></span>
+            </div>
+            
+            <div id="comp-right-icons" class="flex flex-wrap justify-center items-center gap-1 min-h-[90px] max-h-[150px] overflow-y-auto p-2 bg-teal-50/40 rounded-lg w-full"></div>
+            
+            <div id="comp-right-num-box" class="mt-1 text-center">
+              <span id="comp-right-num" class="text-xl font-black text-teal-700 bg-teal-50 px-3 py-0.5 rounded-lg border border-teal-200 inline-block">۴</span>
+            </div>
+
+            <button onclick="checkCompareDirect('right')" class="w-full mt-2 bg-emerald-500 hover:bg-emerald-600 text-white font-black py-2 px-2 rounded-xl text-xs shadow-xs btn-3d">
+              راست بیشتره 👉
+            </button>
+          </div>
+
+          <!-- باکس میانی مساوی -->
+          <div class="flex flex-row sm:flex-col items-center justify-center shrink-0 gap-2 py-1">
+            <div id="comp-alligator-anim" class="w-12 h-12 sm:w-16 sm:h-16 bg-amber-100 rounded-2xl border border-dashed border-amber-400 flex flex-col items-center justify-center text-2xl shadow-xs transition-all">
+              <span id="comp-alligator-icon">🐊</span>
+            </div>
+
+            <button onclick="checkCompareDirect('equal')" class="flex-grow sm:flex-grow-0 bg-white hover:bg-amber-100 border border-amber-400 text-amber-950 font-black py-2 px-3 rounded-xl text-xs shadow-xs btn-3d">
+              مساویند 🟰
+            </button>
+          </div>
+
+          <!-- دسته سمت چپ -->
+          <div class="flex-1 flex flex-col items-center justify-between bg-white p-2.5 rounded-xl border border-teal-200 shadow-xs">
+            <div class="flex items-center justify-between w-full mb-1">
+              <span class="text-[10px] font-black text-teal-800 bg-teal-100 px-2 py-0.5 rounded-md">سمت چپ</span>
+              <span class="text-[10px] font-bold text-slate-500">شمرده: <b id="comp-left-tapped" class="text-emerald-600 font-black">۰</b></span>
+            </div>
+            
+            <div id="comp-left-icons" class="flex flex-wrap justify-center items-center gap-1 min-h-[90px] max-h-[150px] overflow-y-auto p-2 bg-teal-50/40 rounded-lg w-full"></div>
+            
+            <div id="comp-left-num-box" class="mt-1 text-center">
+              <span id="comp-left-num" class="text-xl font-black text-teal-700 bg-teal-50 px-3 py-0.5 rounded-lg border border-teal-200 inline-block">۷</span>
+            </div>
+
+            <button onclick="checkCompareDirect('left')" class="w-full mt-2 bg-sky-500 hover:bg-sky-600 text-white font-black py-2 px-2 rounded-xl text-xs shadow-xs btn-3d">
+              👈 چپ بیشتره
+            </button>
+          </div>
+
+        </div>
+
+        <div id="compare-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+    <!-- ۸. جدول شگفت‌انگیز -->
+    <section id="section-sudoku" class="tab-panel hidden">
+      <div class="glass-card rounded-2xl sm:rounded-3xl p-3 sm:p-6 shadow-md border-2 border-pink-200">
+        <div class="flex items-center justify-between gap-2 mb-3">
+          <h2 class="text-base sm:text-xl font-black text-pink-950">جدول شگفت‌انگیز 🧩</h2>
+          <div class="flex gap-0.5 bg-pink-100 p-0.5 rounded-xl text-xs font-bold shrink-0">
+            <button onclick="setSudokuLevel('easy')" id="sudoku-lvl-easy" class="px-2 py-0.5 rounded-lg bg-pink-600 text-white font-black shadow-xs">۳×۳</button>
+            <button onclick="setSudokuLevel('medium')" id="sudoku-lvl-medium" class="px-2 py-0.5 rounded-lg text-pink-900">۴×۴ تک</button>
+            <button onclick="setSudokuLevel('hard')" id="sudoku-lvl-hard" class="px-2 py-0.5 rounded-lg text-pink-900">۴×۴ کامل</button>
+          </div>
+        </div>
+
+        <!-- بورد بازی -->
+        <div class="flex justify-center mb-3">
+          <div id="sudoku-grid-wrapper" class="bg-white p-2.5 rounded-2xl border-2 border-sky-400 shadow-sm relative inline-block">
+            <div id="sudoku-grid" class="grid gap-1.5"></div>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <span class="text-[11px] font-bold text-slate-500 mb-1.5">خانه خالی علامت‌دار را بزن، سپس رنگ یا شکل بگذار:</span>
+          <div class="flex flex-wrap justify-center gap-2" id="sudoku-palette-box"></div>
+
+          <div class="flex items-center gap-2 mt-3" id="sudoku-action-buttons">
+            <button onclick="checkFullSudoku()" id="sudoku-check-btn" class="bg-emerald-500 hover:bg-emerald-600 text-white font-black px-4 py-2 rounded-xl text-xs shadow-xs btn-3d flex items-center gap-1">
+              <i class="fa-solid fa-check"></i>
+              <span>بررسی جدول</span>
+            </button>
+            <button onclick="newSudokuGame()" class="bg-pink-100 hover:bg-pink-200 text-pink-900 font-bold px-3 py-2 rounded-xl text-xs btn-3d flex items-center gap-1">
+              <i class="fa-solid fa-arrows-rotate"></i>
+              <span>جدول بعدی</span>
+            </button>
+          </div>
+        </div>
+        <div id="sudoku-feedback" class="h-7 text-center font-black text-sm mt-1.5"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- فوتر کوتاه -->
+  <footer class="mt-auto py-2.5 text-center text-[11px] text-slate-500 font-bold bg-white/70 border-t border-amber-200">
+    آموزش آسان مفاهیم پایه اول ❤️ کلاس درس آقای جهدی
+  </footer>
+
+  <!-- مودال ابزار معلم -->
+  <div id="teacher-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-xs z-50 flex items-center justify-center p-3 hidden">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-4 shadow-xl border-3 border-teal-400">
+      <div class="flex justify-between items-center mb-3 pb-2 border-b">
+        <h3 class="font-black text-teal-950 text-sm flex items-center gap-1.5">
+          <i class="fa-solid fa-chalkboard-user text-teal-600"></i>
+          <span>میز کار کلاسی آقای جهدی</span>
+        </h3>
+        <button onclick="toggleTeacherModal()" class="w-7 h-7 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center"><i class="fa-solid fa-xmark text-sm"></i></button>
+      </div>
+
+      <div class="space-y-3">
+        <div class="bg-teal-50 p-2.5 rounded-xl border border-teal-200">
+          <div class="text-[11px] font-black text-teal-900 mb-1">قرعه‌کشی پای تخته 🎯</div>
+          <input id="student-names" type="text" value="علی, محمد, پارسا, سارا, فاطمه, حسین, امیررضا, زهرا, کیان" class="w-full p-1.5 text-xs rounded-lg border border-teal-300 mb-1.5 outline-none font-bold" placeholder="اسامی">
+          <div class="flex gap-1.5">
+            <button onclick="pickStudent()" class="bg-teal-600 text-white px-2.5 py-1 rounded-lg text-xs font-black shadow-xs btn-3d">قرعه‌کشی</button>
+            <div id="picked-name" class="flex-grow bg-white rounded-lg border border-teal-200 text-center font-black text-teal-800 text-xs flex items-center justify-center">...</div>
+          </div>
+        </div>
+
+        <div class="bg-amber-50 p-2.5 rounded-xl border border-amber-200 flex items-center justify-between">
+          <div>
+            <div class="text-[10px] font-black text-amber-900">تایمر مسئله</div>
+            <div id="teacher-timer" class="text-xl font-black text-amber-700 font-mono">01:00</div>
+          </div>
+          <div class="flex gap-1">
+            <button onclick="startTimer(60)" class="bg-amber-500 text-white px-2 py-1 rounded-lg text-[11px] font-bold btn-3d">۱ دقیقه</button>
+            <button onclick="startTimer(30)" class="bg-amber-500 text-white px-2 py-1 rounded-lg text-[11px] font-bold btn-3d">۳۰ ثانیه</button>
+            <button onclick="stopTimer()" class="bg-rose-100 text-rose-700 px-2 py-1 rounded-lg text-[11px] font-bold btn-3d">توقف</button>
+          </div>
+        </div>
+
+        <button onclick="celebrateClass()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black py-2.5 rounded-xl text-xs shadow-md btn-3d flex items-center justify-center gap-1.5">
+          <span>بارش ستاره و تشویق کل کلاس 🌟</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ==========================================================
+       ۰. مدیریت تب‌ها، سیستم صوتی و ستاره‌ها
+       ======================================================== */
+    let globalStars = 0;
+    let isSoundMuted = false;
+    let isDrawerOpen = false;
+
+    function toggleCategoryDrawer() {
+      const drawer = document.getElementById('category-drawer');
+      const backdrop = document.getElementById('category-drawer-backdrop');
+      if (!drawer || !backdrop) return;
+      isDrawerOpen = !isDrawerOpen;
+      if (isDrawerOpen) {
+        drawer.classList.remove('translate-x-full');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100');
+      } else {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+      }
+      playTap();
+    }
+
+    function selectDrawerTab(tabId, titleText) {
+      switchTab(tabId, titleText);
+      toggleCategoryDrawer();
+    }
+
+    function addStars(num) {
+      globalStars += num;
+      const el = document.getElementById('global-stars');
+      if (el) el.innerText = globalStars.toLocaleString('fa-IR');
+    }
+
+    function switchTab(tabId, titleText) {
+      document.querySelectorAll('.tab-panel').forEach(panel => {
+        panel.classList.add('hidden');
+        panel.classList.remove('block');
+      });
+      const targetPanel = document.getElementById(`section-${tabId}`);
+      if (targetPanel) {
+        targetPanel.classList.remove('hidden');
+        targetPanel.classList.add('block');
+      }
+
+      if (titleText) {
+        const badge = document.getElementById('current-section-badge');
+        if (badge) badge.innerText = titleText;
+      }
+
+      document.querySelectorAll('.drawer-nav-item').forEach(item => {
+        if (item.dataset.tab === tabId) {
+          item.className = 'drawer-nav-item w-full text-right p-3 rounded-2xl font-black text-sm flex items-center gap-3 bg-amber-500 text-white shadow';
+        } else {
+          item.className = 'drawer-nav-item w-full text-right p-3 rounded-2xl font-bold text-sm flex items-center gap-3 bg-slate-50 text-slate-700 hover:bg-amber-50';
+        }
+      });
+
+      playTap();
+    }
+
+    let tapSynth = null;
+    let bellSynth = null;
+
+    function initAudio() {
+      try {
+        if (!tapSynth && window.Tone) {
+          tapSynth = new Tone.MembraneSynth({
+            pitchDecay: 0.05,
+            octaves: 2,
+            oscillator: { type: 'sine' },
+            envelope: { attack: 0.001, decay: 0.2, sustain: 0.01, release: 0.2 }
+          }).toDestination();
+          tapSynth.volume.value = -12;
+
+          bellSynth = new Tone.PolySynth(Tone.Synth, {
+            oscillator: { type: 'triangle' },
+            envelope: { attack: 0.02, decay: 0.3, sustain: 0.2, release: 0.8 }
+          }).toDestination();
+          bellSynth.volume.value = -8;
+        }
+      } catch (e) {}
+    }
+
+    function playTap() {
+      if (isSoundMuted) return;
+      try {
+        initAudio();
+        if (Tone.context.state !== 'running') Tone.start();
+        if (tapSynth) tapSynth.triggerAttackRelease('C3', '16n');
+      } catch (e) {}
+    }
+
+    function playSuccess() {
+      if (isSoundMuted) return;
+      try {
+        initAudio();
+        if (Tone.context.state !== 'running') Tone.start();
+        if (bellSynth) {
+          const now = Tone.now();
+          bellSynth.triggerAttackRelease('C5', '8n', now);
+          bellSynth.triggerAttackRelease('E5', '8n', now + 0.1);
+          bellSynth.triggerAttackRelease('G5', '8n', now + 0.2);
+          bellSynth.triggerAttackRelease('C6', '4n', now + 0.3);
+        }
+        if (window.confetti) confetti({ particleCount: 40, spread: 50, origin: { y: 0.7 } });
+      } catch (e) {}
+    }
+
+    function playWrong() {
+      if (isSoundMuted) return;
+      try {
+        initAudio();
+        if (Tone.context.state !== 'running') Tone.start();
+        if (bellSynth) {
+          const now = Tone.now();
+          bellSynth.triggerAttackRelease('D4', '8n', now);
+          bellSynth.triggerAttackRelease('C#4', '4n', now + 0.15);
+        }
+      } catch (e) {}
+    }
+
+    function toggleSoundMute() {
+      isSoundMuted = !isSoundMuted;
+      const icon = document.querySelector('#btn-sound-toggle i');
+      if (isSoundMuted) {
+        icon.className = 'fa-solid fa-volume-xmark text-rose-500 text-xs md:text-sm';
+      } else {
+        icon.className = 'fa-solid fa-volume-high text-slate-700 text-xs md:text-sm';
+        playTap();
+      }
+    }
+
+    /* ۱. ماژول شمارش */
+    let countRange = 30;
+    let targetCount = 0;
+    let currentTappedCount = 0;
+    const countItemsIcons = ['🎈', '🍎', '⭐', '🚗', '🍓', '🧁', '⚽', '🍬', '🐥', '🧸'];
+
+    function setCountingRange(rng) {
+      countRange = rng;
+      [10, 20, 30].forEach(r => {
+        const btn = document.getElementById(`count-range-${r}`);
+        if (btn) {
+          btn.className = (r === rng)
+            ? 'px-2 py-1 rounded-lg bg-amber-500 text-white font-black shadow-xs'
+            : 'px-2 py-1 rounded-lg text-amber-900';
+        }
+      });
+      playTap();
+      newCountingGame();
+    }
+
+    function newCountingGame() {
+      const area = document.getElementById('counting-items-area');
+      const optBox = document.getElementById('counting-options-box');
+      const countDisp = document.getElementById('counted-so-far');
+      const fb = document.getElementById('counting-feedback');
+      if (!area || !optBox) return;
+
+      area.innerHTML = '';
+      optBox.innerHTML = '';
+      if (fb) fb.innerText = '';
+      currentTappedCount = 0;
+      if (countDisp) countDisp.innerText = '۰';
+
+      const minVal = (countRange === 10) ? 2 : (countRange === 20 ? 8 : 12);
+      targetCount = Math.floor(Math.random() * (countRange - minVal + 1)) + minVal;
+      const icon = countItemsIcons[Math.floor(Math.random() * countItemsIcons.length)];
+
+      for (let i = 1; i <= targetCount; i++) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center text-xl sm:text-2xl shadow-xs border border-amber-200 transition-all select-none btn-3d';
+        btn.innerHTML = icon;
+        btn.dataset.counted = 'false';
+
+        btn.onclick = () => {
+          if (btn.dataset.counted === 'false') {
+            btn.dataset.counted = 'true';
+            btn.classList.add('ring-3', 'ring-emerald-400', 'bg-emerald-100', 'scale-105');
+            currentTappedCount++;
+            if (countDisp) countDisp.innerText = currentTappedCount.toLocaleString('fa-IR');
+            playTap();
+          }
+        };
+        area.appendChild(btn);
+      }
+
+      const options = [targetCount];
+      while (options.length < 4) {
+        const delta = Math.floor(Math.random() * 7) - 3;
+        const fake = targetCount + delta;
+        if (fake >= 1 && fake <= countRange && !options.includes(fake)) {
+          options.push(fake);
+        }
+      }
+      options.sort(() => Math.random() - 0.5);
+
+      options.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'bg-white hover:bg-amber-100 border border-amber-300 rounded-xl py-2.5 text-lg sm:text-xl font-black text-amber-900 shadow-xs active:scale-95 transition btn-3d';
+        b.innerText = opt.toLocaleString('fa-IR');
+        b.onclick = () => selectCountingOption(opt);
+        optBox.appendChild(b);
+      });
+    }
+
+    function selectCountingOption(selected) {
+      const fb = document.getElementById('counting-feedback');
+      if (selected === targetCount) {
+        playSuccess();
+        addStars(2);
+        if (fb) fb.innerHTML = '<span class="text-emerald-600">آفرین! درست شمردی 👏🎈</span>';
+        setTimeout(newCountingGame, 1500);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">دوباره با دقت با انگشتت بشمار! 🧐</span>';
+      }
+    }
+
+    /* ۲. ماژول مزرعه حیوانات */
+    const farmAnimals = [
+      { id: 'rabbit', icon: '🐰', name: 'خرگوش‌ها' },
+      { id: 'chick', icon: '🐥', name: 'جوجه‌ها' },
+      { id: 'frog', icon: '🐸', name: 'قورباغه‌ها' },
+      { id: 'cat', icon: '🐱', name: 'گربه‌ها' },
+      { id: 'bear', icon: '🐻', name: 'خرس‌ها' },
+      { id: 'duck', icon: '🦆', name: 'اردک‌ها' }
+    ];
+    let targetAnimal = null;
+    let targetAnimalCount = 0;
+    let farmTappedCount = 0;
+
+    function newAnimalFarmGame() {
+      const area = document.getElementById('animal-farm-area');
+      const optBox = document.getElementById('animal-farm-options');
+      const fb = document.getElementById('animal-farm-feedback');
+      const tapDisp = document.getElementById('farm-tapped-count');
+      const targetIconEl = document.getElementById('target-animal-icon');
+      const targetNameEl = document.getElementById('target-animal-name');
+      if (!area || !optBox) return;
+
+      area.innerHTML = '';
+      optBox.innerHTML = '';
+      if (fb) fb.innerText = '';
+      farmTappedCount = 0;
+      if (tapDisp) tapDisp.innerText = '۰';
+
+      targetAnimal = farmAnimals[Math.floor(Math.random() * farmAnimals.length)];
+      if (targetIconEl) targetIconEl.innerText = targetAnimal.icon;
+      if (targetNameEl) targetNameEl.innerText = `فقط ${targetAnimal.name} را بشمار!`;
+
+      targetAnimalCount = Math.floor(Math.random() * 8) + 3;
+      const otherAnimals = farmAnimals.filter(a => a.id !== targetAnimal.id);
+
+      const allFarmItems = [];
+      for (let i = 0; i < targetAnimalCount; i++) {
+        allFarmItems.push({ ...targetAnimal, isTarget: true });
+      }
+
+      const totalDistractors = Math.floor(Math.random() * 7) + 5;
+      for (let i = 0; i < totalDistractors; i++) {
+        const randOther = otherAnimals[Math.floor(Math.random() * otherAnimals.length)];
+        allFarmItems.push({ ...randOther, isTarget: false });
+      }
+
+      allFarmItems.sort(() => Math.random() - 0.5);
+
+      allFarmItems.forEach(item => {
+        const b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center text-2xl shadow-xs border border-lime-200 transition-all active:scale-90 btn-3d';
+        b.innerHTML = item.icon;
+        b.dataset.tapped = 'false';
+
+        b.onclick = () => handleAnimalTap(b, item);
+        area.appendChild(b);
+      });
+
+      const options = [targetAnimalCount];
+      while (options.length < 4) {
+        const fake = targetAnimalCount + (Math.floor(Math.random() * 7) - 3);
+        if (fake >= 1 && fake <= 15 && !options.includes(fake)) {
+          options.push(fake);
+        }
+      }
+      options.sort(() => Math.random() - 0.5);
+
+      options.forEach(opt => {
+        const ob = document.createElement('button');
+        ob.className = 'bg-white hover:bg-lime-100 border border-lime-300 rounded-xl py-2.5 text-lg sm:text-xl font-black text-lime-900 shadow-xs active:scale-95 transition btn-3d';
+        ob.innerText = opt.toLocaleString('fa-IR');
+        ob.onclick = () => checkAnimalAnswer(opt);
+        optBox.appendChild(ob);
+      });
+    }
+
+    function handleAnimalTap(btn, item) {
+      if (btn.dataset.tapped === 'true') return;
+      if (item.isTarget) {
+        btn.dataset.tapped = 'true';
+        btn.classList.add('ring-3', 'ring-lime-400', 'bg-lime-100', 'scale-105');
+        farmTappedCount++;
+        const tapDisp = document.getElementById('farm-tapped-count');
+        if (tapDisp) tapDisp.innerText = farmTappedCount.toLocaleString('fa-IR');
+        playTap();
+      } else {
+        btn.classList.add('bg-rose-100');
+        playWrong();
+        setTimeout(() => btn.classList.remove('bg-rose-100'), 400);
+      }
+    }
+
+    function checkAnimalAnswer(selected) {
+      const fb = document.getElementById('animal-farm-feedback');
+      if (selected === targetAnimalCount) {
+        playSuccess();
+        addStars(2);
+        if (fb) fb.innerHTML = `<span class="text-emerald-600">فوق‌العاده بود! ${targetAnimalCount.toLocaleString('fa-IR')} تا ${targetAnimal.name} پیدا کردی! 🎉</span>`;
+        setTimeout(newAnimalFarmGame, 1500);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">تعداد درست نیست؛ دوباره بشمار!</span>';
+      }
+    }
+
+    /* ۳. ماژول چوب‌خط */
+    let tallyMode = 'quiz';
+    let tallyQuizRange = 30;
+    let tallyTargetNum = 14;
+    let sandboxUserCount = 0;
+    let sandboxTargetNum = 18;
+
+    function setTallyMode(mode) {
+      tallyMode = mode;
+      const quizArea = document.getElementById('tally-quiz-area');
+      const sandArea = document.getElementById('tally-sandbox-area');
+      const btnQ = document.getElementById('tally-btn-quiz');
+      const btnS = document.getElementById('tally-btn-sandbox');
+      const fb = document.getElementById('tally-feedback');
+      if (fb) fb.innerText = '';
+
+      if (mode === 'quiz') {
+        if (quizArea) quizArea.style.display = 'block';
+        if (sandArea) sandArea.style.display = 'none';
+        if (btnQ) btnQ.className = 'px-2.5 py-1 rounded-lg text-xs font-black bg-orange-600 text-white shadow-xs';
+        if (btnS) btnS.className = 'px-2.5 py-1 rounded-lg text-xs font-black text-orange-900';
+        newTallyGame();
+      } else {
+        if (quizArea) quizArea.style.display = 'none';
+        if (sandArea) sandArea.style.display = 'block';
+        if (btnS) btnS.className = 'px-2.5 py-1 rounded-lg text-xs font-black bg-orange-600 text-white shadow-xs';
+        if (btnQ) btnQ.className = 'px-2.5 py-1 rounded-lg text-xs font-black text-orange-900';
+        newSandboxChallenge();
+      }
+      playTap();
+    }
+
+    function setTallyQuizRange(rng) {
+      tallyQuizRange = rng;
+      [10, 20, 30].forEach(r => {
+        const btn = document.getElementById(`tally-range-${r}`);
+        if (btn) {
+          btn.className = (r === rng)
+            ? 'px-2 py-0.5 rounded bg-orange-500 text-white font-black shadow-xs'
+            : 'px-2 py-0.5 rounded text-orange-900';
+        }
+      });
+      playTap();
+      newTallyGame();
+    }
+
+    function generateTallyHTML(num) {
+      const bundles = Math.floor(num / 5);
+      const remainder = num % 5;
+      let html = '<div class="flex flex-wrap items-center justify-center gap-1.5">';
+
+      for (let b = 0; b < bundles; b++) {
+        html += `
+          <div class="tally-bundle">
+            <div class="tally-line"></div>
+            <div class="tally-line"></div>
+            <div class="tally-line"></div>
+            <div class="tally-line"></div>
+            <div class="tally-slash"></div>
+          </div>
+        `;
+      }
+
+      if (remainder > 0) {
+        html += '<div class="tally-single-container">';
+        for (let r = 0; r < remainder; r++) {
+          html += '<div class="tally-line"></div>';
+        }
+        html += '</div>';
+      }
+
+      html += '</div>';
+      return html;
+    }
+
+    function newTallyGame() {
+      const targetDisp = document.getElementById('tally-target-num');
+      const choicesBox = document.getElementById('tally-choices-box');
+      const helper = document.getElementById('tally-helper-text');
+      const fb = document.getElementById('tally-feedback');
+      if (!choicesBox) return;
+
+      if (fb) fb.innerText = '';
+      choicesBox.innerHTML = '';
+
+      const minVal = (tallyQuizRange === 10) ? 1 : (tallyQuizRange === 20 ? 6 : 12);
+      tallyTargetNum = Math.floor(Math.random() * (tallyQuizRange - minVal + 1)) + minVal;
+
+      if (targetDisp) targetDisp.innerText = tallyTargetNum.toLocaleString('fa-IR');
+      if (helper) {
+        const bnd = Math.floor(tallyTargetNum / 5);
+        const rem = tallyTargetNum % 5;
+        helper.innerText = `${bnd.toLocaleString('fa-IR')} دسته ۵ تایی و ${rem.toLocaleString('fa-IR')} تا یکی`;
+      }
+
+      const options = [tallyTargetNum];
+      while (options.length < 3) {
+        const delta = Math.floor(Math.random() * 9) - 4;
+        const fake = tallyTargetNum + delta;
+        if (fake >= 1 && fake <= tallyQuizRange && !options.includes(fake)) {
+          options.push(fake);
+        }
+      }
+      options.sort(() => Math.random() - 0.5);
+
+      options.forEach(opt => {
+        const card = document.createElement('button');
+        card.type = 'button';
+        card.className = 'bg-white hover:bg-orange-50 border border-orange-300 rounded-xl p-2 min-h-[70px] flex items-center justify-center shadow-xs active:scale-95 transition btn-3d';
+        card.innerHTML = generateTallyHTML(opt);
+
+        card.onclick = () => {
+          if (opt === tallyTargetNum) {
+            playSuccess();
+            addStars(2);
+            if (fb) fb.innerHTML = '<span class="text-emerald-600">آفرین! چوب‌خط درسته 👏🥖</span>';
+            setTimeout(newTallyGame, 1500);
+          } else {
+            playWrong();
+            if (fb) fb.innerHTML = '<span class="text-rose-500">دقت کن! دسته‌های ۵ تایی را دوباره بشمار.</span>';
+          }
+        };
+        choicesBox.appendChild(card);
+      });
+    }
+
+    function newSandboxChallenge() {
+      sandboxUserCount = 0;
+      sandboxTargetNum = Math.floor(Math.random() * 25) + 5;
+      const tDisp = document.getElementById('sandbox-target-display');
+      if (tDisp) tDisp.innerText = sandboxTargetNum.toLocaleString('fa-IR');
+      renderSandboxTally();
+      const fb = document.getElementById('tally-feedback');
+      if (fb) fb.innerText = '';
+    }
+
+    function addSandboxTally() {
+      if (sandboxUserCount < 30) {
+        sandboxUserCount++;
+        renderSandboxTally();
+        playTap();
+      }
+    }
+
+    function removeSandboxTally() {
+      if (sandboxUserCount > 0) {
+        sandboxUserCount--;
+        renderSandboxTally();
+        playTap();
+      }
+    }
+
+    function resetSandboxTally() {
+      sandboxUserCount = 0;
+      renderSandboxTally();
+      playTap();
+    }
+
+    function renderSandboxTally() {
+      const box = document.getElementById('sandbox-tally-display');
+      if (!box) return;
+      if (sandboxUserCount === 0) {
+        box.innerHTML = '<span class="text-slate-400 text-xs">روی «یکی بکش» بزنید</span>';
+      } else {
+        box.innerHTML = generateTallyHTML(sandboxUserCount);
+      }
+    }
+
+    function checkSandboxTally() {
+      const fb = document.getElementById('tally-feedback');
+      if (sandboxUserCount === sandboxTargetNum) {
+        playSuccess();
+        addStars(3);
+        if (fb) fb.innerHTML = '<span class="text-emerald-600">عالی! چوب‌خط با عدد برابر شد! 🌟</span>';
+        setTimeout(newSandboxChallenge, 1600);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">برابر نیست! دوباره امتحان کن. 🧐</span>';
+      }
+    }
+
+    /* ۴. قورباغه روی محور */
+    let axisRange = 10;
+    let axisOpType = 'both';
+    let currentAxisStart = 0;
+    let currentAxisStep = 0;
+    let currentAxisFinal = 0;
+    let currentAxisIsAdd = true;
+
+    function setAxisRange(rng) {
+      axisRange = rng;
+      [10, 20].forEach(r => {
+        const btn = document.getElementById(`axis-range-${r}`);
+        if (btn) {
+          btn.className = (r === rng)
+            ? 'px-2 py-0.5 rounded-lg bg-emerald-600 text-white font-black shadow-xs'
+            : 'px-2 py-0.5 rounded-lg text-emerald-900';
+        }
+      });
+      buildAxisUI();
+      newAxisGame();
+      playTap();
+    }
+
+    function setAxisOp(op) {
+      axisOpType = op;
+      ['both', 'add', 'sub'].forEach(o => {
+        const btn = document.getElementById(`axis-op-${o}`);
+        if (btn) {
+          btn.className = (o === op)
+            ? 'px-2 py-0.5 rounded-lg bg-emerald-600 text-white font-black shadow-xs'
+            : 'px-2 py-0.5 rounded-lg text-emerald-900 font-bold';
+        }
+      });
+      newAxisGame();
+      playTap();
+    }
+
+    function buildAxisUI() {
+      const ticks = document.getElementById('axis-ticks');
+      const labels = document.getElementById('axis-numbers-labels');
+      const grid = document.getElementById('axis-numbers-grid');
+      if (!ticks || !labels || !grid) return;
+
+      ticks.innerHTML = '';
+      labels.innerHTML = '';
+      grid.innerHTML = '';
+
+      for (let i = 0; i <= axisRange; i++) {
+        const pct = (i / axisRange) * 100;
+        const tick = document.createElement('div');
+        tick.className = 'absolute top-0 w-0.5 h-2.5 bg-white';
+        tick.style.left = `${pct}%`;
+        ticks.appendChild(tick);
+
+        const lbl = document.createElement('div');
+        lbl.className = 'absolute text-center transform -translate-x-1/2';
+        lbl.style.left = `${pct}%`;
+        lbl.innerText = i.toLocaleString('fa-IR');
+        labels.appendChild(lbl);
+
+        const b = document.createElement('button');
+        b.className = 'bg-white hover:bg-emerald-100 border border-emerald-300 rounded-lg py-1.5 text-xs sm:text-sm font-black text-emerald-950 shadow-xs active:scale-90 transition btn-3d';
+        b.innerText = i.toLocaleString('fa-IR');
+        b.onclick = () => checkAxisNumber(i);
+        grid.appendChild(b);
+      }
+    }
+
+    function moveFrogTo(num, isForward = true) {
+      const frog = document.getElementById('frog-avatar');
+      if (!frog) return;
+      const pct = (num / axisRange) * 100;
+      frog.style.left = `${pct}%`;
+      frog.style.transform = isForward ? 'translateX(-50%) scaleX(1)' : 'translateX(-50%) scaleX(-1)';
+    }
+
+    function newAxisGame() {
+      const fb = document.getElementById('axis-feedback');
+      const qText = document.getElementById('axis-question-text');
+      if (fb) fb.innerText = '';
+
+      if (axisOpType === 'both') {
+        currentAxisIsAdd = Math.random() < 0.55;
+      } else {
+        currentAxisIsAdd = (axisOpType === 'add');
+      }
+
+      if (currentAxisIsAdd) {
+        currentAxisStart = Math.floor(Math.random() * (axisRange - 3)) + 1;
+        const maxStep = axisRange - currentAxisStart;
+        currentAxisStep = Math.floor(Math.random() * Math.min(maxStep, 6)) + 1;
+        currentAxisFinal = currentAxisStart + currentAxisStep;
+
+        if (qText) {
+          qText.innerText = `قورباغه روی عدد ${currentAxisStart.toLocaleString('fa-IR')} است؛ ${currentAxisStep.toLocaleString('fa-IR')} تا جلو می‌پرد!`;
+        }
+        moveFrogTo(currentAxisStart, true);
+      } else {
+        currentAxisStart = Math.floor(Math.random() * (axisRange - 4)) + 4;
+        currentAxisStep = Math.floor(Math.random() * (currentAxisStart - 1)) + 1;
+        currentAxisFinal = currentAxisStart - currentAxisStep;
+
+        if (qText) {
+          qText.innerText = `قورباغه روی عدد ${currentAxisStart.toLocaleString('fa-IR')} است؛ ${currentAxisStep.toLocaleString('fa-IR')} تا عقب برمی‌گردد!`;
+        }
+        moveFrogTo(currentAxisStart, false);
+      }
+    }
+
+    function checkAxisNumber(selected) {
+      const fb = document.getElementById('axis-feedback');
+      if (selected === currentAxisFinal) {
+        moveFrogTo(currentAxisFinal, currentAxisIsAdd);
+        playSuccess();
+        addStars(2);
+        if (fb) fb.innerHTML = `<span class="text-emerald-600">آفرین! روی عدد ${currentAxisFinal.toLocaleString('fa-IR')} نشست 🐸</span>`;
+        setTimeout(newAxisGame, 1600);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">قدم‌ها را با دقت بشمار!</span>';
+      }
+    }
+
+    /* ۵. جمع و تفریق */
+    let opType = 'add';
+    let opRange = 40;
+    let opNum1 = 4;
+    let opNum2 = 3;
+    let opResult = 7;
+
+    function setOperationType(type) {
+      opType = type;
+      const bAdd = document.getElementById('op-btn-add');
+      const bSub = document.getElementById('op-btn-sub');
+      if (type === 'add') {
+        if (bAdd) bAdd.className = 'px-2 py-0.5 rounded font-black bg-sky-600 text-white';
+        if (bSub) bSub.className = 'px-2 py-0.5 rounded font-black text-sky-800';
+      } else {
+        if (bSub) bSub.className = 'px-2 py-0.5 rounded font-black bg-sky-600 text-white';
+        if (bAdd) bAdd.className = 'px-2 py-0.5 rounded font-black text-sky-800';
+      }
+      playTap();
+      newOperationGame();
+    }
+
+    function setOpRange(rng) {
+      opRange = rng;
+      [10, 20, 40].forEach(r => {
+        const btn = document.getElementById(`op-range-${r}`);
+        if (btn) {
+          btn.className = (r === rng)
+            ? 'px-1.5 py-0.5 rounded bg-amber-500 text-white font-black shadow-xs'
+            : 'px-1.5 py-0.5 rounded text-amber-900';
+        }
+      });
+      playTap();
+      newOperationGame();
+    }
+
+    function renderVisualGroup(container, num) {
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (num <= 8) {
+        for (let i = 0; i < num; i++) {
+          const s = document.createElement('span');
+          s.className = 'text-base sm:text-lg';
+          s.innerText = '🍎';
+          container.appendChild(s);
+        }
+      } else {
+        const tens = Math.floor(num / 10);
+        const ones = num % 10;
+        for (let t = 0; t < tens; t++) {
+          const tBox = document.createElement('div');
+          tBox.className = 'bg-amber-100 border border-amber-300 px-1 py-0.5 rounded text-[10px] font-black text-amber-900';
+          tBox.innerText = '۱۰تایی';
+          container.appendChild(tBox);
+        }
+        for (let o = 0; o < Math.min(ones, 4); o++) {
+          const s = document.createElement('span');
+          s.className = 'text-xs';
+          s.innerText = '🍎';
+          container.appendChild(s);
+        }
+      }
+    }
+
+    function newOperationGame() {
+      const g1 = document.getElementById('op-group-1');
+      const g2 = document.getElementById('op-group-2');
+      const n1 = document.getElementById('op-num-1');
+      const n2 = document.getElementById('op-num-2');
+      const sign = document.getElementById('op-sign');
+      const ansGrid = document.getElementById('op-answers-grid');
+      const fb = document.getElementById('op-feedback');
+      if (!g1 || !g2 || !ansGrid) return;
+
+      if (fb) fb.innerText = '';
+      ansGrid.innerHTML = '';
+
+      if (opType === 'add') {
+        if (sign) sign.innerText = '+';
+        const half = Math.floor(opRange / 2);
+        opNum1 = Math.floor(Math.random() * (half - 1)) + 1;
+        opNum2 = Math.floor(Math.random() * (opRange - opNum1)) + 1;
+        opResult = opNum1 + opNum2;
+      } else {
+        if (sign) sign.innerText = '-';
+        opNum1 = Math.floor(Math.random() * (opRange - 2)) + 2;
+        opNum2 = Math.floor(Math.random() * (opNum1 - 1)) + 1;
+        opResult = opNum1 - opNum2;
+      }
+
+      if (n1) n1.innerText = opNum1.toLocaleString('fa-IR');
+      if (n2) n2.innerText = opNum2.toLocaleString('fa-IR');
+
+      renderVisualGroup(g1, opNum1);
+      renderVisualGroup(g2, opNum2);
+
+      const options = [opResult];
+      while (options.length < 4) {
+        const delta = Math.floor(Math.random() * 9) - 4;
+        const fake = opResult + delta;
+        if (fake >= 0 && fake <= opRange && !options.includes(fake)) {
+          options.push(fake);
+        }
+      }
+      options.sort(() => Math.random() - 0.5);
+
+      options.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'bg-white hover:bg-sky-100 border border-sky-300 rounded-xl py-2.5 text-lg sm:text-xl font-black text-sky-950 shadow-xs active:scale-95 transition btn-3d';
+        b.innerText = opt.toLocaleString('fa-IR');
+        b.onclick = () => checkOpAnswer(opt);
+        ansGrid.appendChild(b);
+      });
+    }
+
+    function checkOpAnswer(selected) {
+      const fb = document.getElementById('op-feedback');
+      if (selected === opResult) {
+        playSuccess();
+        addStars(2);
+        if (fb) fb.innerHTML = '<span class="text-emerald-600">جواب کاملاً درسته 👏</span>';
+        setTimeout(newOperationGame, 1500);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">دوباره با دقت حساب کن.</span>';
+      }
+    }
+
+    /* ۶. قطار الگوها */
+    let patternDifficulty = 'easy';
+    let currentPatternTarget = '';
+    const shapeChoicesPool = ['🔺', '🟢', '🟦', '🟠', '🟡', '🟪', '⭐', '🌙', '🔴', '🔷'];
+
+    function setPatternDifficulty(diff) {
+      patternDifficulty = diff;
+      ['easy', 'medium', 'hard'].forEach(d => {
+        const btn = document.getElementById(`pattern-diff-${d}`);
+        if (btn) {
+          btn.className = (d === diff)
+            ? 'px-2 py-0.5 rounded-lg bg-purple-600 text-white font-black shadow-xs'
+            : 'px-2 py-0.5 rounded-lg text-purple-900';
+        }
+      });
+      playTap();
+      newPatternGame();
+    }
+
+    function newPatternGame() {
+      const carsBox = document.getElementById('pattern-train-cars');
+      const choicesBox = document.getElementById('pattern-choices-box');
+      const fb = document.getElementById('pattern-feedback');
+      if (!carsBox || !choicesBox) return;
+
+      if (fb) fb.innerText = '';
+      carsBox.innerHTML = '';
+      choicesBox.innerHTML = '';
+
+      let baseSequence = [];
+      if (patternDifficulty === 'easy') {
+        const samples = [['🔴', '🟡'], ['🔺', '🔷'], ['⭐', '🌙']];
+        baseSequence = samples[Math.floor(Math.random() * samples.length)];
+      } else if (patternDifficulty === 'medium') {
+        const samples = [['🔺', '🔺', '🟢'], ['🟦', '🟠', '🔺'], ['🔴', '🔴', '🔺']];
+        baseSequence = samples[Math.floor(Math.random() * samples.length)];
+      } else {
+        const samples = [['🟦', '🟦', '🔺', '🟡'], ['🟠', '🔺', '🔺', '🟪']];
+        baseSequence = samples[Math.floor(Math.random() * samples.length)];
+      }
+
+      const fullTrain = [];
+      while (fullTrain.length < 6) fullTrain.push(...baseSequence);
+
+      const displayCars = fullTrain.slice(0, 5);
+      currentPatternTarget = fullTrain[5];
+
+      displayCars.forEach(icon => {
+        const c = document.createElement('div');
+        c.className = 'w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center text-2xl shadow-xs border border-purple-200 shrink-0';
+        c.innerText = icon;
+        carsBox.appendChild(c);
+      });
+
+      const qCar = document.createElement('div');
+      qCar.className = 'w-10 h-10 sm:w-12 sm:h-12 bg-purple-200 rounded-xl border border-dashed border-purple-500 flex items-center justify-center text-lg font-black text-purple-900 shrink-0';
+      qCar.innerText = '؟';
+      carsBox.appendChild(qCar);
+
+      const options = [currentPatternTarget];
+      while (options.length < 4) {
+        const randS = shapeChoicesPool[Math.floor(Math.random() * shapeChoicesPool.length)];
+        if (!options.includes(randS)) options.push(randS);
+      }
+      options.sort(() => Math.random() - 0.5);
+
+      options.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'w-12 h-12 text-2xl bg-white border border-purple-300 rounded-xl shadow-xs active:scale-95 transition flex items-center justify-center btn-3d';
+        b.innerText = opt;
+        b.onclick = () => checkPatternCar(opt);
+        choicesBox.appendChild(b);
+      });
+    }
+
+    function checkPatternCar(selected) {
+      const fb = document.getElementById('pattern-feedback');
+      if (selected === currentPatternTarget) {
+        playSuccess();
+        addStars(2);
+        if (fb) fb.innerHTML = '<span class="text-emerald-600">آفرین! واگن درست را گذاشتی 🚂</span>';
+        setTimeout(newPatternGame, 1500);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">نظم شکل‌ها را دوباره ببین!</span>';
+      }
+    }
+
+    /* ۷. تمساح شکمو */
+    let compDifficulty = 'easy';
+    let compRightCount = 4;
+    let compLeftCount = 7;
+    let compRightTapped = 0;
+    let compLeftTapped = 0;
+
+    function setCompareDifficulty(diff) {
+      compDifficulty = diff;
+      ['easy', 'medium', 'hard'].forEach(d => {
+        const btn = document.getElementById(`comp-diff-${d}`);
+        if (btn) {
+          btn.className = (d === diff)
+            ? 'px-2 py-0.5 rounded-lg bg-teal-600 text-white font-black shadow-xs'
+            : 'px-2 py-0.5 rounded-lg text-teal-900';
+        }
+      });
+      playTap();
+      newCompareGame();
+    }
+
+    function newCompareGame() {
+      const fb = document.getElementById('compare-feedback');
+      const rBox = document.getElementById('comp-right-icons');
+      const lBox = document.getElementById('comp-left-icons');
+      const rNum = document.getElementById('comp-right-num');
+      const lNum = document.getElementById('comp-left-num');
+      const rNumBox = document.getElementById('comp-right-num-box');
+      const lNumBox = document.getElementById('comp-left-num-box');
+      const animBox = document.getElementById('comp-alligator-anim');
+      const rTappedDisp = document.getElementById('comp-right-tapped');
+      const lTappedDisp = document.getElementById('comp-left-tapped');
+      if (!rBox || !lBox) return;
+
+      if (fb) fb.innerText = '';
+      if (animBox) animBox.className = 'w-12 h-12 sm:w-16 sm:h-16 bg-amber-100 rounded-2xl border border-dashed border-amber-400 flex flex-col items-center justify-center text-2xl shadow-xs transition-all';
+
+      compRightTapped = 0;
+      compLeftTapped = 0;
+      if (rTappedDisp) rTappedDisp.innerText = '۰';
+      if (lTappedDisp) lTappedDisp.innerText = '۰';
+
+      let maxN = 10;
+      if (compDifficulty === 'medium') maxN = 20;
+      if (compDifficulty === 'hard') maxN = 30;
+      const minN = (compDifficulty === 'easy') ? 1 : 4;
+
+      const willEqual = Math.random() < 0.1;
+      compRightCount = Math.floor(Math.random() * (maxN - minN + 1)) + minN;
+
+      if (willEqual) {
+        compLeftCount = compRightCount;
+      } else {
+        do {
+          compLeftCount = Math.floor(Math.random() * (maxN - minN + 1)) + minN;
+        } while (compLeftCount === compRightCount);
+      }
+
+      if (compDifficulty === 'easy') {
+        if (rNumBox) rNumBox.style.display = 'block';
+        if (lNumBox) lNumBox.style.display = 'block';
+        if (rNum) rNum.innerText = compRightCount.toLocaleString('fa-IR');
+        if (lNum) lNum.innerText = compLeftCount.toLocaleString('fa-IR');
+      } else {
+        if (rNumBox) rNumBox.style.display = 'none';
+        if (lNumBox) lNumBox.style.display = 'none';
+      }
+
+      rBox.innerHTML = '';
+      for (let i = 0; i < compRightCount; i++) {
+        const fish = document.createElement('button');
+        fish.type = 'button';
+        fish.className = 'text-xl sm:text-2xl p-0.5 bg-white rounded-lg border border-teal-100 btn-3d';
+        fish.innerText = '🐟';
+        fish.dataset.counted = 'false';
+        fish.onclick = () => tapCompareFish(fish, 'right');
+        rBox.appendChild(fish);
+      }
+
+      lBox.innerHTML = '';
+      for (let i = 0; i < compLeftCount; i++) {
+        const fish = document.createElement('button');
+        fish.type = 'button';
+        fish.className = 'text-xl sm:text-2xl p-0.5 bg-white rounded-lg border border-teal-100 btn-3d';
+        fish.innerText = '🐟';
+        fish.dataset.counted = 'false';
+        fish.onclick = () => tapCompareFish(fish, 'left');
+        lBox.appendChild(fish);
+      }
+    }
+
+    function tapCompareFish(el, side) {
+      if (el.dataset.counted === 'false') {
+        el.dataset.counted = 'true';
+        el.classList.add('bg-emerald-200', 'ring-2', 'ring-emerald-500');
+        if (side === 'right') {
+          compRightTapped++;
+          const d = document.getElementById('comp-right-tapped');
+          if (d) d.innerText = compRightTapped.toLocaleString('fa-IR');
+        } else {
+          compLeftTapped++;
+          const d = document.getElementById('comp-left-tapped');
+          if (d) d.innerText = compLeftTapped.toLocaleString('fa-IR');
+        }
+        playTap();
+      }
+    }
+
+    function checkCompareDirect(chosenSide) {
+      const fb = document.getElementById('compare-feedback');
+      let correctSide = 'equal';
+      if (compRightCount > compLeftCount) correctSide = 'right';
+      if (compLeftCount > compRightCount) correctSide = 'left';
+
+      if (chosenSide === correctSide) {
+        playSuccess();
+        addStars(2);
+        if (fb) fb.innerHTML = '<span class="text-emerald-600">آفرین! دسته‌ی درست انتخاب شد 🐊</span>';
+        setTimeout(newCompareGame, 1500);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">تمساح همیشه طرف بیشتر را می‌خورد!</span>';
+      }
+    }
+
+    /* ۸. جدول شگفت‌انگیز */
+    let sudokuLevel = 'easy';
+    let currentSudokuSize = 3;
+    let sudokuBoard = [];
+    let sudokuSolution = [];
+    let selectedCell = null;
+
+    const shapePalette = [
+      { id: 'circle', symbol: '⚪' },
+      { id: 'square', symbol: '⬜' },
+      { id: 'triangle', symbol: '🔺' }
+    ];
+
+    const colorPalette = [
+      { id: 'red', symbol: '🔴' },
+      { id: 'yellow', symbol: '🟡' },
+      { id: 'green', symbol: '🟢' },
+      { id: 'blue', symbol: '🔵' }
+    ];
+
+    function setSudokuLevel(lvl) {
+      sudokuLevel = lvl;
+      ['easy', 'medium', 'hard'].forEach(l => {
+        const btn = document.getElementById(`sudoku-lvl-${l}`);
+        if (btn) {
+          btn.className = (l === lvl)
+            ? 'px-2 py-0.5 rounded-lg bg-pink-600 text-white font-black shadow-xs'
+            : 'px-2 py-0.5 rounded-lg text-pink-900';
+        }
+      });
+      playTap();
+      newSudokuGame();
+    }
+
+    function renderSudokuPalette() {
+      const box = document.getElementById('sudoku-palette-box');
+      if (!box) return;
+      box.innerHTML = '';
+      const items = (sudokuLevel === 'easy') ? shapePalette : colorPalette;
+
+      items.forEach(item => {
+        const b = document.createElement('button');
+        b.className = 'w-11 h-11 text-2xl bg-white border border-pink-300 rounded-xl shadow-xs active:scale-95 transition flex items-center justify-center btn-3d';
+        b.innerHTML = item.symbol;
+        b.onclick = () => fillSelectedCell(item.symbol);
+        box.appendChild(b);
+      });
+    }
+
+    function newSudokuGame() {
+      selectedCell = null;
+      const fb = document.getElementById('sudoku-feedback');
+      if (fb) fb.innerText = '';
+      renderSudokuPalette();
+
+      const checkBtn = document.getElementById('sudoku-check-btn');
+
+      if (sudokuLevel === 'easy') {
+        currentSudokuSize = 3;
+        if (checkBtn) checkBtn.style.display = 'inline-flex';
+        generateShapeSudoku3x3();
+      } else if (sudokuLevel === 'medium') {
+        currentSudokuSize = 4;
+        if (checkBtn) checkBtn.style.display = 'none';
+        generateColorSudoku4x4(true);
+      } else {
+        currentSudokuSize = 4;
+        if (checkBtn) checkBtn.style.display = 'inline-flex';
+        generateColorSudoku4x4(false);
+      }
+
+      drawSudokuBoard();
+    }
+
+    function generateShapeSudoku3x3() {
+      const syms = ['⚪', '⬜', '🔺'];
+      const perm = [...syms].sort(() => Math.random() - 0.5);
+      sudokuSolution = [
+        [perm[0], perm[1], perm[2]],
+        [perm[1], perm[2], perm[0]],
+        [perm[2], perm[0], perm[1]]
+      ];
+      sudokuBoard = sudokuSolution.map(row => [...row]);
+      let removed = 0;
+      while (removed < 2) {
+        const r = Math.floor(Math.random() * 3);
+        const c = Math.floor(Math.random() * 3);
+        if (sudokuBoard[r][c] !== '') {
+          sudokuBoard[r][c] = '';
+          removed++;
+        }
+      }
+    }
+
+    function generateColorSudoku4x4(singleHole = false) {
+      const colors = ['🔴', '🟡', '🟢', '🔵'].sort(() => Math.random() - 0.5);
+      sudokuSolution = [
+        [colors[0], colors[1], colors[2], colors[3]],
+        [colors[2], colors[3], colors[0], colors[1]],
+        [colors[1], colors[0], colors[3], colors[2]],
+        [colors[3], colors[2], colors[1], colors[0]]
+      ];
+      sudokuBoard = sudokuSolution.map(row => [...row]);
+
+      if (singleHole) {
+        const r = Math.floor(Math.random() * 4);
+        const c = Math.floor(Math.random() * 4);
+        sudokuBoard[r][c] = '';
+      } else {
+        let removed = 0;
+        while (removed < 3) {
+          const r = Math.floor(Math.random() * 4);
+          const c = Math.floor(Math.random() * 4);
+          if (sudokuBoard[r][c] !== '') {
+            sudokuBoard[r][c] = '';
+            removed++;
+          }
+        }
+      }
+    }
+
+    function drawSudokuBoard() {
+      const grid = document.getElementById('sudoku-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      grid.className = (currentSudokuSize === 3) ? 'grid grid-cols-3 gap-1.5' : 'grid grid-cols-4 gap-1.5';
+
+      for (let r = 0; r < currentSudokuSize; r++) {
+        for (let c = 0; c < currentSudokuSize; c++) {
+          const cell = document.createElement('button');
+          cell.type = 'button';
+          cell.id = `sdk-cell-${r}-${c}`;
+          
+          let cellClasses = 'w-11 h-11 sm:w-13 sm:h-13 rounded-xl flex items-center justify-center text-2xl shadow-xs transition btn-3d ';
+          if (currentSudokuSize === 4) {
+            let bStyles = 'border border-sky-300 ';
+            if (r === 1) bStyles += 'border-b-2 border-b-sky-600 ';
+            if (c === 1) bStyles += 'border-l-2 border-l-sky-600 ';
+            cellClasses += bStyles;
+          } else {
+            cellClasses += 'border border-pink-300 ';
+          }
+
+          const val = sudokuBoard[r][c];
+          if (val === '') {
+            cellClasses += 'bg-amber-50 border-dashed border-amber-400 ';
+            cell.innerHTML = '<span class="text-amber-400 text-sm font-black">؟</span>';
+            cell.onclick = () => selectSudokuCell(r, c);
+          } else {
+            cellClasses += 'bg-white ';
+            cell.innerHTML = val;
+          }
+
+          cell.className = cellClasses;
+          grid.appendChild(cell);
+        }
+      }
+      autoSelectFirstEmpty();
+    }
+
+    function autoSelectFirstEmpty() {
+      for (let r = 0; r < currentSudokuSize; r++) {
+        for (let c = 0; c < currentSudokuSize; c++) {
+          if (sudokuBoard[r][c] === '') {
+            selectSudokuCell(r, c);
+            return;
+          }
+        }
+      }
+    }
+
+    function selectSudokuCell(r, c) {
+      selectedCell = { r, c };
+      document.querySelectorAll('[id^="sdk-cell-"]').forEach(el => {
+        el.classList.remove('ring-3', 'ring-amber-400', 'bg-amber-100');
+      });
+      const cellEl = document.getElementById(`sdk-cell-${r}-${c}`);
+      if (cellEl) {
+        cellEl.classList.add('ring-3', 'ring-amber-400', 'bg-amber-100');
+        playTap();
+      }
+    }
+
+    function fillSelectedCell(symbol) {
+      if (!selectedCell) return;
+      const { r, c } = selectedCell;
+      const cellEl = document.getElementById(`sdk-cell-${r}-${c}`);
+      if (!cellEl) return;
+
+      cellEl.innerHTML = `<span class="animate-pop">${symbol}</span>`;
+      playTap();
+
+      if (sudokuLevel === 'medium') {
+        const correct = sudokuSolution[r][c];
+        const fb = document.getElementById('sudoku-feedback');
+        if (symbol === correct) {
+          playSuccess();
+          addStars(2);
+          if (fb) fb.innerHTML = '<span class="text-emerald-600">آفرین! جدول کامل شد! 🧩</span>';
+          setTimeout(newSudokuGame, 1500);
+        } else {
+          playWrong();
+          if (fb) fb.innerHTML = '<span class="text-rose-500">رنگ تکراری است!</span>';
+        }
+        return;
+      }
+
+      cellEl.dataset.userVal = symbol;
+    }
+
+    function checkFullSudoku() {
+      const fb = document.getElementById('sudoku-feedback');
+      let allFilled = true;
+      let isCorrect = true;
+
+      for (let r = 0; r < currentSudokuSize; r++) {
+        for (let c = 0; c < currentSudokuSize; c++) {
+          if (sudokuBoard[r][c] === '') {
+            const cellEl = document.getElementById(`sdk-cell-${r}-${c}`);
+            const userVal = cellEl ? cellEl.dataset.userVal : '';
+            if (!userVal) allFilled = false;
+            else if (userVal !== sudokuSolution[r][c]) isCorrect = false;
+          }
+        }
+      }
+
+      if (!allFilled) {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-amber-600">همه‌ی خانه‌های خالی را پر کن! 🧐</span>';
+        return;
+      }
+
+      if (isCorrect) {
+        playSuccess();
+        addStars(3);
+        if (fb) fb.innerHTML = '<span class="text-emerald-600">آفرین! جدول شگفت‌انگیز درست چیده شد! 👏</span>';
+        setTimeout(newSudokuGame, 1800);
+      } else {
+        playWrong();
+        if (fb) fb.innerHTML = '<span class="text-rose-500">چند خانه تکراری دارد؛ دوباره چک کن!</span>';
+      }
+    }
+
+    /* ابزارهای کلاسی */
+    function toggleTeacherModal() {
+      document.getElementById('teacher-modal').classList.toggle('hidden');
+      playTap();
+    }
+
+    function pickStudent() {
+      const names = document.getElementById('student-names').value.split(',').map(s=>s.trim()).filter(Boolean);
+      const box = document.getElementById('picked-name');
+      let count = 0;
+      const t = setInterval(() => {
+        box.innerText = names[Math.floor(Math.random() * names.length)];
+        count++;
+        if (count > 10) {
+          clearInterval(t);
+          playSuccess();
+        }
+      }, 70);
+    }
+
+    let timerId = null;
+    function startTimer(sec) {
+      clearInterval(timerId);
+      let s = sec;
+      const disp = document.getElementById('teacher-timer');
+      timerId = setInterval(() => {
+        s--;
+        const m = Math.floor(s / 60).toString().padStart(2, '0');
+        const remS = (s % 60).toString().padStart(2, '0');
+        disp.innerText = `${m}:${remS}`;
+        if (s <= 0) {
+          clearInterval(timerId);
+          disp.innerText = 'زمان پایان!';
+          playWrong();
+        }
+      }, 1000);
+      playTap();
+    }
+
+    function stopTimer() {
+      clearInterval(timerId);
+      document.getElementById('teacher-timer').innerText = '00:00';
+      playTap();
+    }
+
+    function celebrateClass() {
+      playSuccess();
+      addStars(5);
+      confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      newCountingGame();
+      newAnimalFarmGame();
+      newTallyGame();
+      buildAxisUI();
+      newAxisGame();
+      newOperationGame();
+      newPatternGame();
+      newCompareGame();
+      newSudokuGame();
+    });
+  </script>
+</body>
+</html>
